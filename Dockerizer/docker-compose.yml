@@ -1,13 +1,14 @@
 version: "3.8"
 services:
-  python-app:
+  dockenizer-app:
     build: .
     environment:
         - REPO=${REPO}
         - IMAGE=${IMAGE}
+        - BRANCH=${BRANCH}
     volumes:
-      - ./:/code
-    container_name: python-app
+      - ./:/app
+    container_name: dockenizer-app
 
   watchtower:
     image: containrrr/watchtower
