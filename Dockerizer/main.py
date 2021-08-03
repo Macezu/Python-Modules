@@ -13,9 +13,9 @@ def find_and_build(filename, path, image):
 
 def main():
     # For testing purposes
-    os.environ['REPO'] = 'https://github.com/karthequian/docker-helloworld'
-    os.environ['IMAGE'] = 'test'
-    os.environ['BRANCH'] = "master"
+    # os.environ['REPO'] = 'https://github.com/karthequian/docker-helloworld'
+    # os.environ['IMAGE'] = 'test'
+    # os.environ['BRANCH'] = "master"
 
     while True:
         repo = os.environ['REPO']
