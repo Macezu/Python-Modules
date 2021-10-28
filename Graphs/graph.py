@@ -37,7 +37,7 @@ class Graph(object):
             else:
                 self._graph_dict[x] = [y]
 
-    def __generate_edged(self):
+    def __generate_edges(self):
         """ A static method generating the edges of the 
             graph "graph". Edges are represented as sets 
             with one (a loop back to the vertex) or two 
@@ -50,4 +50,19 @@ class Graph(object):
                     edges.append({vertex,neighbour})
         return edges
 
+    def __iter__(self):
+        self._iter_obj = iter(self._graph_dict)
+        return self._iter_obj
     
+    def __next__(self):
+        "allows us to iter over the vertices"
+        return next(self._iter_obj)
+    
+    def __str__(self) -> str:
+        res = "vertices: "
+        for k in self._graph_dict:
+            res += str(k) + " "
+        res += "\nedges: "
+        for edge in self.__generate_edges():
+            res += str(edge) + " "
+        return res
