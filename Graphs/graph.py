@@ -19,7 +19,7 @@ class Graph(object):
     
     def all_edges(self):
         "returns all edges of a graph"
-        return self.generate_edges()
+        return self.__generate_edges()
 
     def add_vertex(self,vertex):
         if vertex not in self._graph_dict:
