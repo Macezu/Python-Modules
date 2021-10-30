@@ -1,25 +1,31 @@
 from graph import Graph
 
-g = { "a" : {"c","b"},
-      "b" : {"a","d"},
-      "c" : {"a","d"},
+g = { "a" : {"d"},
+      "b" : {"c"},
+      "c" : {"b", "c", "d", "e"},
+      "d" : {"a", "c"},
       "e" : {"c"},
-      "f" : {}  
+      "f" : {}
     }
 
+
 graph = Graph(g)
-
-for vertice in graph:
-    print(f"Edges of vertice {vertice}: ", graph.edges(vertice))
-
-print("Add vertex:")
-graph.add_vertex("z")
-
-print("Add an edge:")
-graph.add_edge({"a", "d"})
 
 print("Vertices of graph:")
 print(graph.all_vertices())
 
 print("Edges of graph:")
 print(graph.all_edges())
+
+
+print('The path from vertex "a" to vertex "b":')
+path = graph.find_path("a", "b")
+print(path)
+
+print('The path from vertex "a" to vertex "f":')
+path = graph.find_path("a", "f")
+print(path)
+
+print('The path from vertex "c" to vertex "c":')
+path = graph.find_path("c", "c")
+print(path)
