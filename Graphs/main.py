@@ -1,11 +1,11 @@
 from graph import Graph
 
-g = { "a" : {"d"},
+g = { "a" : {"d", "f"},
       "b" : {"c"},
       "c" : {"b", "c", "d", "e"},
-      "d" : {"a", "c"},
+      "d" : {"a", "c", "f"},
       "e" : {"c"},
-      "f" : {}
+      "f" : {"a", "d"}
     }
 
 
@@ -18,14 +18,14 @@ print("Edges of graph:")
 print(graph.all_edges())
 
 
-print('The path from vertex "a" to vertex "b":')
-path = graph.find_path("a", "b")
+print('All paths from vertex "a" to vertex "b":')
+path = graph.find_all_paths("a", "b")
 print(path)
 
-print('The path from vertex "a" to vertex "f":')
-path = graph.find_path("a", "f")
+print('All paths from vertex "a" to vertex "f":')
+path = graph.find_all_paths("a", "f")
 print(path)
 
-print('The path from vertex "c" to vertex "c":')
-path = graph.find_path("c", "c")
+print('All paths from vertex "c" to vertex "c":')
+path = graph.find_all_paths("c", "c")
 print(path)

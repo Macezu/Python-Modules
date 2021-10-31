@@ -99,6 +99,5 @@ class Graph(object):
                 for p in extended_paths:
                     paths.append(p)
         return paths
-
     
 
