@@ -1,6 +1,17 @@
 from graph import Graph
+from graph2 import Graph2
 
 g = { "a" : {"d", "f"},
+      "b" : {"c"},
+      "c" : {"b", "c", "d", "e"},
+      "d" : {"a", "c"},
+      "e" : {"c"},
+      "f" : {"d"}
+    }
+
+
+
+g2 = { "a" : {"d", "f"},
       "b" : {"c"},
       "c" : {"b", "c", "d", "e"},
       "d" : {"a", "c", "f"},
@@ -9,23 +20,5 @@ g = { "a" : {"d", "f"},
     }
 
 
-graph = Graph(g)
-
-print("Vertices of graph:")
-print(graph.all_vertices())
-
-print("Edges of graph:")
-print(graph.all_edges())
-
-
-print('All paths from vertex "a" to vertex "b":')
-path = graph.find_all_paths("a", "b")
-print(path)
-
-print('All paths from vertex "a" to vertex "f":')
-path = graph.find_all_paths("a", "f")
-print(path)
-
-print('All paths from vertex "c" to vertex "c":')
-path = graph.find_all_paths("c", "c")
-print(path)
+graph = Graph2(g2)
+graph.degree_sequence()

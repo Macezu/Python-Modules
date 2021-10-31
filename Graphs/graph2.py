@@ -10,7 +10,7 @@ class Graph2(Graph):
         of adjacent vertices. """
         degree = len(self._graph_dict[vertex])
         if vertex in self._graph_dict[vertex]:
-            degree +1
+            degree += 1
         return degree
     
     def find_isolated_vertices(self):
