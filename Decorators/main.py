@@ -1,5 +1,6 @@
 from datetime import datetime
 
+print("------")
 def decorator_function(original_function):
     def wrapper_function():
         print("wrapper executed this before {}".format(original_function.__name__))
@@ -13,7 +14,7 @@ def display():
 decorated_display = decorator_function(display)
 
 decorated_display()
-print("----------\n")
+print("----------")
 #Or The other way
 
 def decorator_function2(original_function):
@@ -26,17 +27,17 @@ def decorator_function2(original_function):
 def salute_you():
     print("Amazing gainz you got there")
 
-
+salute_you()
 
 #Passing arguments the real way
 #-------------
-print("---------\n")
+print("---------")
 
 def decorator_function_with_arguments(original_function):
     #args and kwargs permit any data to flow trough
     def wrapper_function(*args, **kwargs):
         print("\nwrapper executed this before {}".format(original_function.__name__))
-        print(f"I too know the arguments: {args}")
+        print(f"I too know the arguments if given: {args}")
         return original_function(*args, **kwargs)
     return wrapper_function
 
@@ -49,12 +50,29 @@ def display_info(name: str,age:int):
 def give_year(name:str):
     print(f"Hello {name}, the time is:",datetime.now())
 
-
+@decorator_function_with_arguments
+def hello_world():
+    print("Hello world, i dont use aguments")
 
 give_year("Mikko")
 
 display_info("John",22)
 
+hello_world()
+
+#Class decorator
+class decorator_class(object):
+    def __init__(self, original_function):
+        self.original_function = original_function
+
+    #The call method works like the wrapper function from before
+    def __call__(self, *args, **kwargs):
+        print("\nCall method excecuted this before {}".format(self.original_function.__name__))
+        return self.original_function(*args, **kwargs)
 
 
+@decorator_class
+def display_info_class(name : str):
+    print(f"Hello {name}, im using decorator class")
 
+display_info_class("Ismo")
