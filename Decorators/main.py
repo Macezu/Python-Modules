@@ -1,4 +1,6 @@
 from datetime import datetime
+#To preserve the original functions
+from functools import wraps
 
 
 #Class decorator
@@ -7,6 +9,7 @@ class decorator_class(object):
         self.original_function = original_function
 
     #The call method works like the wrapper function from before
+    @wraps(object)
     def __call__(self, *args, **kwargs):
         print("\nCall method excecuted this before {}".format(self.original_function.__name__))
         return self.original_function(*args, **kwargs)
@@ -21,6 +24,8 @@ display_info_class("Ismo")
 
 print("------")
 def decorator_function(original_function):
+
+    @wraps(original_function)
     def wrapper_function():
         print("wrapper executed this before {}".format(original_function.__name__))
         return original_function()
@@ -37,6 +42,8 @@ print("----------")
 #Or The other way
 
 def decorator_function2(original_function):
+
+    @wraps(original_function)
     def wrapper_function():
         print("I ran before the og_function")
         return original_function()
@@ -54,6 +61,8 @@ print("---------")
 
 def decorator_function_with_arguments(original_function):
     #args and kwargs permit any data to flow trough
+
+    @wraps(original_function)
     def wrapper_function(*args, **kwargs):
         print("\nwrapper executed this before {}".format(original_function.__name__))
         print(f"I too know the arguments if given: {args}")
@@ -84,6 +93,7 @@ def my_logger(orig_func):
     import logging
     logging.basicConfig(filename="{}.log".format(orig_func.__name__),level=logging.INFO)
 
+    @wraps(orig_func)
     def wrapper(*args, **kwargs):
         logging.info(
             "Ran with args: {}, and kwargs: {}".format(args,kwargs)
@@ -95,13 +105,14 @@ def my_logger(orig_func):
 def my_timer(orig_func):
     import time
     
+    @wraps(orig_func)
     def wrapper(*args, **kwargs):
         t1 = time.time()
         result = orig_func(*args, **kwargs)
         t2 = time.time() - t1
         print(f"{orig_func.__name__} ran in: {t2} sec")
         return result
-    #Ensin ajetaan wrapperin sisältä
+    #Ensin ajetaan kutsuva function jossa print toteutuu ja sitten palataan wrapperiin ja printataan kestänyt aika
     return wrapper
 
 
@@ -122,3 +133,16 @@ def output_info(name:str,age:int):
 
 take_time()
 output_info("Jouni",54)
+
+
+# With @Wraps(original_variable) we can chain the functions and keep the og names
+print("\n",display_info.__name__)
+# This would have printed "wrapper" before and chaining wrappers
+
+# @my_logger
+# @my_timer
+# @my_logger
+# def output_info(name:str,age:int):
+#     print(f"\nOutput Info ran with arguments {name} and {age}")
+
+# would have printed wrapper as log name
