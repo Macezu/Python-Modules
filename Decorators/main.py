@@ -1,15 +1,15 @@
 
-
-def decorator_function(original_function:function):
+def decorator_function(original_function):
     def wrapper_function():
         return original_function()
     return wrapper_function
 
 
 
+def display():
+    print("display function ran")
 
-mikko_myfunc = decorator_function("Mikko")
-hi_myfunc = decorator_function("Hello Hi")
 
-mikko_myfunc()
-hi_myfunc()
+decorated_display = decorator_function(display)
+
+decorated_display()
