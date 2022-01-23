@@ -45,7 +45,8 @@ for row in rows:
             if "Tiedot" in col.text:
                 temp.append(col)
                 col.click()
-                sleep(3)
+                reserve_btn = driver.find_element(By.CLASS_NAME, "btn-primary")
+                sleep(5)
         try:
             strTime = str(col.text)
             converted = datetime.strptime(strTime, '%d.%m.%Y')
